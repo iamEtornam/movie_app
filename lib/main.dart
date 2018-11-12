@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Example App',
-      theme: new ThemeData.dark(),
+      theme: new ThemeData.light(),
       home: new HomePage(),
     );
   }
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   //get your API KEY from https://www.themoviedb.org/settings/account. Replace the xxxxxxxxxxxxx with your API KEY
   final String url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXX&language=en-US";
+      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXXX&language=en-US";
   List data;
 
   @override
