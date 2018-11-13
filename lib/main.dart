@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:example_app/detailspage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,7 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //get your API KEY from https://www.themoviedb.org/settings/account. Replace the xxxxxxxxxxxxx with your API KEY
   final String url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXXX&language=en-US";
+      "https://api.themoviedb.org/3/movie/popular?api_key=cdc84ae4f6ff8f02f92ab34144142c69&language=en-US";
 
   List data;
 
@@ -66,15 +67,19 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        image: DecorationImage(image: NetworkImage(
-                            "https://image.tmdb.org/t/p/w500" +
-                                data[index]['poster_path']),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              "https://image.tmdb.org/t/p/w500" +
+                                  data[index]['poster_path']),
                           fit: BoxFit.fill,
-                        )
-                    ),
+                        )),
                   ),
                   onTap: () {
-
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsPage(data[index]),
+                        ));
                   },
                 );
               });
