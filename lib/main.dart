@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //get your API KEY from https://www.themoviedb.org/settings/account. Replace the xxxxxxxxxxxxx with your API KEY
   final String url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXXXX&language=en-US";
+      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXXX&language=en-US";
 
   List data;
 
@@ -52,46 +52,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: Text('Movies Hub'),
-      ),
-      body: GridView.builder(
-          itemCount: data == null ? 0 : data.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, crossAxisSpacing: 5.0),
-          itemBuilder: (BuildContext context, int index) {
-            return SingleChildScrollView(
-              child: IntrinsicHeight(
-                child: GestureDetector(
-                  child: Card(
-                    elevation: 2.0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://image.tmdb.org/t/p/w500" +
-                                            data[index]['poster_path'])
-                                )
-                            ),
-                          ),
-                          Container(
-                            child: Text(
-                              data[index]['title'],
-                              style: TextStyle(fontSize: 14.0),
-                            ),
-                            margin: EdgeInsets.all(5.0),
-                          ),
-                        ],
-                      ),
+        appBar: new AppBar(
+          title: Text('Movies Hub'),
+        ),
+        body: OrientationBuilder(builder: (context, orientation) {
+          return GridView.builder(
+              itemCount: data == null ? 0 : data.length,
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount:
+                  (orientation == Orientation.portrait) ? 2 : 3),
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(image: NetworkImage(
+                            "https://image.tmdb.org/t/p/w500" +
+                                data[index]['poster_path']),
+                          fit: BoxFit.fill,
+                        )
+                    ),
                   ),
-                  onTap: () {},
-                ),
-              ),
-            );
-          }),
-    );
+                  onTap: () {
+
+                  },
+                );
+              });
+        }));
   }
 }
