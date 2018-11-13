@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Example App',
-      theme: new ThemeData.light(),
+      theme: new ThemeData.dark(),
       home: new HomePage(),
     );
   }
@@ -23,10 +23,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   //get your API KEY from https://www.themoviedb.org/settings/account. Replace the xxxxxxxxxxxxx with your API KEY
   final String url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXXX&language=en-US";
+      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXXXXXXX&language=en-US";
+
   List data;
 
   @override
@@ -52,38 +52,46 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: Text('Movies Hub'),
-        ),
-        body: ListView.builder(
+      appBar: new AppBar(
+        title: Text('Movies Hub'),
+      ),
+      body: GridView.builder(
           itemCount: data == null ? 0 : data.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 5.0),
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Card(
+            return SingleChildScrollView(
+              child: IntrinsicHeight(
+                child: GestureDetector(
+                  child: Card(
+                    elevation: 2.0,
                       child: Column(
-                            children: <Widget>[
-                              Container(
-                                height: 150.0,
-                                child: Image.network("https://image.tmdb.org/t/p/w500/" + data[index]['poster_path'],fit: BoxFit.fill,),
-                              ),
-                              Container(
-                                child: Text(data[index]['title'],
-                                style: TextStyle(fontSize: 16.0),),
-                                padding: const EdgeInsets.all(8.0),
-                              ),
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        "https://image.tmdb.org/t/p/w500" +
+                                            data[index]['poster_path'])
+                                )
+                            ),
+                          ),
+                          Container(
+                            child: Text(
+                              data[index]['title'],
+                              style: TextStyle(fontSize: 14.0),
+                            ),
+                            margin: EdgeInsets.all(5.0),
+                          ),
                         ],
                       ),
-                      elevation: 5.0,
-                    )
-                  ],
+                  ),
+                  onTap: () {},
                 ),
               ),
             );
-          },
-        ));
+          }),
+    );
   }
 }
