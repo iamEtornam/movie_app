@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //get your API KEY from https://www.themoviedb.org/settings/account. Replace the xxxxxxxxxxxxx with your API KEY
   final String url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=cdc84ae4f6ff8f02f92ab34144142c69&language=en-US";
+      "https://api.themoviedb.org/3/movie/popular?api_key=XXXXXXXXXXXXXX&language=en-US";
 
   List data;
 

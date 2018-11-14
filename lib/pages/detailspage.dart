@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
 class DetailsPage extends StatefulWidget {
   final Map<String, Object> value;
@@ -13,12 +14,10 @@ class DetailsPage extends StatefulWidget {
 
 class DetailsPageState extends State<DetailsPage> {
   bool _alreadySaved = false;
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(
         title: Text("Movie Details"),
         actions: <Widget>[
@@ -28,8 +27,11 @@ class DetailsPageState extends State<DetailsPage> {
 //            ),
             icon: Icon(Icons.favorite_border),
             onPressed: () {
-              _showSnackBar("hello");
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Hello!'),
+              ));
             },
+
           )
         ],
       ),
@@ -126,8 +128,8 @@ class DetailsPageState extends State<DetailsPage> {
   }
 }
 
-void _showSnackBar(String text) {
-  SnackBar(
+/*void _showSnackBar(BuildContext context, String text) {
+  final snackBar = SnackBar(
     content: Text(text),
     action: SnackBarAction(
       label: 'Undo',
@@ -136,4 +138,6 @@ void _showSnackBar(String text) {
       },
     ),
   );
-}
+
+  Scaffold.of(context).showSnackBar(snackBar);
+}*/

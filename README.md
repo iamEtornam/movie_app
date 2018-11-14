@@ -1,6 +1,6 @@
-# example_app
+# Movie Hub
 
-A new Flutter application.
+Movie Hub is a simple Experiment Flutter app that displays popular movies from themoviedb.org 
 
 ## Getting Started
 
